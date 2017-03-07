@@ -1,29 +1,10 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+*.sw0
+*.st0
+*.ic0
+*.ac0
+*.lis
+*.sw1
+*.tr0
+*.pa0
+scope.log
+scope.log.bak
