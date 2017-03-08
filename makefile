@@ -1,4 +1,4 @@
-SOURCE = hw7
+SOURCE = proj
 
 default:
 	hspice ${SOURCE}.sp :> ${SOURCE}.lis
