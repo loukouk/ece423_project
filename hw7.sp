@@ -3,7 +3,7 @@
 .inc "../tsmc25"
 
 
-.subckt opamp vg1 vg2 out1 out2 gcm ncm Vdd GND!
+.subckt opamp vg1 vg2 out1 out2 gcm ncmn Vdd GND!
 ** COMMON MODE REFERENCE **
 Vcm vgcm 0 DC=1V
 
@@ -21,8 +21,8 @@ M5 n4 nref3 n3 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
 M6 n7 nref3 n2 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
 M7 n4 nref2 n5 Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
 M8 n7 nref2 n6 Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M9 n5 nref1 Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M10 n6 nref1 Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
+M9 n5 gcm Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
+M10 n6 gcm Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
 
 ** SECOND STAGE **
 M11 out1 nref1 Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
@@ -45,29 +45,31 @@ Mb10 nref2 nref2 nb3 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
 Mb11 nb3 nref4 0 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
 
 ** COMMON MODE FEEDBACK (WITH RESISTORS)**
-Mcm1 n11 nref1 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm2 n12 nref2 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm3 0 out1 n11 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm4 0 out2 n12 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Rcm1 n11 n13 25k
-Rcm2 n12 n13 25k
-Mcm5 ncm ncm Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm6 n14 n14 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm7 ncm n13 n15 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm8 n14 n16 n15 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm9 n15 nref4 0 0 CMOSN l=.25u w=20u ad=21.12p as=21.12p pd=41.32u ps=41.32u
-Mcm10 n16 nref1 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mcm11 0 vgcm n16 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm1 n11 nref1 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm2 n12 nref2 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm3 0 out1 n11 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm4 0 out2 n12 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Rcm1 n11 n13 25k
+*Rcm2 n12 n13 25k
+*Mcm5 n17 ncmn Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm6 n18 ncmp Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm12 ncmn nref2 n17 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm13 ncmp nref2 n18 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm7 ncmn n13 n15 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm8 ncmp n16 n15 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm9 n15 nref4 0 0 CMOSN l=.25u w=20u ad=21.12p as=21.12p pd=41.32u ps=41.32u
+*Mcm10 n16 nref1 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+*Mcm11 0 vgcm n16 Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
 
 ** COMMON MODE FEEDBACK (NO RESISTORS)**
-**Mcm1 n11 nref4 0 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm2 n12 nref4 0 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm3 n13 out1 n11 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm4 n13 out2 n12 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm5 ncm vgcm n11 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm6 ncm vgcm n12 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-**Mcm7 ncm ncm Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-**Mcm8 n12 nref2 Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
+Mcm1 n11 nref4 0 0 CMOSN l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
+Mcm2 n12 nref4 0 0 CMOSN l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
+Mcm3 ncmn out1 n11 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+Mcm4 ncmn out2 n12 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+Mcm5 ncmp vgcm n11 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+Mcm6 ncmp vgcm n12 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+Mcm7 ncmp ncmp Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
+Mcm8 ncmn ncmn Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
 
 ** PASSIVE COMPONENTS **
 CL1 out1 0 3p
@@ -84,7 +86,7 @@ Clp2 vg2 out2 1p
 
 
 ** CMFB EVALUATION SETUP **********************
-*Vcmtest vt 0 DC=1.81305V AC=1V
+*Vcmtest vt 0 DC=1.7839541V AC=1V
 *Xop1 vg1 vg2 out1 out2 vt cmfb_out Vdd 0 opamp
 *Xop2 vg1 vg2 ot1 ot2 cmfb_out nf Vdd 0 opamp
 ***********************************************
