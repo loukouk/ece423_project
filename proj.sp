@@ -12,40 +12,36 @@ Iref nref22 0 100u
 *Ri nref22 0 20k
 
 ** MAIN TRANSISTORS **
-M0 n1 gcm Vdd Vdd CMOSP l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M00 n1 nref1 Vdd Vdd CMOSP l=.25u w=120u ad=79.2p as=79.2p pd=241.32u ps=241.32u
-M1 n2 vg1 n1 Vdd CMOSP l=.25u w=160u ad=105.6p as=105.6p pd=321.32u ps=321.32u
-M2 n3 vg2 n1 Vdd CMOSP l=.25u w=160u ad=105.6p as=105.6p pd=321.32u ps=321.32u
-M3 n3 nref4 0 0 CMOSN l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M4 n2 nref4 0 0 CMOSN l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M5 n4 nref3 n3 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M6 n7 nref3 n2 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M7 n4 nref2 n5 Vdd CMOSP l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M8 n7 nref2 n6 Vdd CMOSP l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M9 n5 gcm Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-M10 n6 gcm Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-M09 n5 nref1 Vdd Vdd CMOSP l=.25u w=60u ad=39.6p as=39.6p pd=121.32u ps=121.32
-M010 n6 nref1 Vdd Vdd CMOSP l=.25u w=60u ad=39.6p as=39.6p pd=121.32u ps=121.32
+M0 n1 gcm Vdd Vdd CMOSP l=1u w=640u ad=105.6p as=105.6p pd=321.32u ps=321.32u
+M1 n2 vg1 n1 Vdd CMOSP l=.25u w=160u
+M2 n3 vg2 n1 Vdd CMOSP l=.25u w=160u
+M3 n3 nref4 0 0 CMOSN l=1u w=320u
+M4 n2 nref4 0 0 CMOSN l=1u w=320u
+M5 n4 nref3 n3 0 CMOSN l=.5u w=80u
+M6 n7 nref3 n2 0 CMOSN l=.5u w=80u
+M7 n4 nref2 n5 Vdd CMOSP l=.5u w=320u
+M8 n7 nref2 n6 Vdd CMOSP l=.5u w=320u
+M9 n5 gcm Vdd Vdd CMOSP l=1u  w=320u
+M10 n6 gcm Vdd Vdd CMOSP l=1u  w=320u
 
 ** SECOND STAGE **
-M11 out1 nref1 Vdd Vdd CMOSP l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M12 out1 n4 0 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-M13 out2 nref1 Vdd Vdd CMOSP l=.25u w=80u ad=52.8p as=52.8p pd=161.32u ps=161.32u
-M14 out2 n7 0 0 CMOSN l=.25u w=40u ad=26.4p as=26.4p pd=81.32u ps=81.32u
-
+M11 out1 nref1 Vdd Vdd CMOSP l=1u w=320u
+M12 out1 n4 0 0 CMOSN l=.25u w=40u
+M13 out2 nref1 Vdd Vdd CMOSP l=1u w=320u
+M14 out2 n7 0 0 CMOSN l=.25u w=40u
 
 ** BIASING TRANSISTORS **
-Mb1 nref1 nref1 Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb2 nref22 nref22 nref1 Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb3 nb1 nref1 Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb4 nref4 nref22 nb1 Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb5 nref4 nref4 0 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mb6 nb2 nref1 Vdd Vdd CMOSP l=.25u w=20u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb7 nref3 nref22 nb2 Vdd CMOSP l=.25u w=10u ad=13.2p as=13.2p pd=41.32u ps=41.32u
-Mb8 nref3 nref3 0 0 CMOSN l=.25u w=2u ad=1.32p as=1.32p pd=3.32u ps=3.32u
-Mb9 nref2 nref2 Vdd Vdd CMOSP l=.25u w=4u ad=2.64p as=2.64p pd=9.32u ps=9.32u
-Mb10 nref2 nref2 nb3 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
-Mb11 nb3 nref4 0 0 CMOSN l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
+Mb1 nref1 nref1 Vdd Vdd CMOSP l=1u w=80u
+Mb2 nref22 nref22 nref1 Vdd CMOSP l=1u w=80u
+Mb3 nb1 nref1 Vdd Vdd CMOSP l=1u w=80u
+Mb4 nref4 nref22 nb1 Vdd CMOSP l=1u w=80u
+Mb5 nref4 nref4 0 0 CMOSN l=1u w=40u
+Mb6 nb2 nref1 Vdd Vdd CMOSP l=1u w=80u
+Mb7 nref3 nref22 nb2 Vdd CMOSP l=1u w=40u
+Mb8 nref3 nref3 0 0 CMOSN l=.5u w=4u
+Mb9 nref2 nref2 Vdd Vdd CMOSP l=.5u w=8u
+Mb10 nref2 nref2 nb3 0 CMOSN l=.5u w=20u
+Mb11 nb3 nref4 0 0 CMOSN l=1u w=40u
 
 ** COMMON MODE FEEDBACK (WITH RESISTORS)**
 *Mcm1 n11 nref1 Vdd Vdd CMOSP l=.25u w=10u ad=6.6p as=6.6p pd=21.32u ps=21.32u
