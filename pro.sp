@@ -17,7 +17,7 @@
 .param wc = 10.02u
 .param wd = 19.98u
 .param we = 40.02u
-.param wf = 79.98u
+.param wf = 95u
 .param wg = 160.02u
 .param wh = 186u
 .param wi = 319.98u
@@ -25,7 +25,10 @@
 .param wk = 120u
 .param wl = 480u
 
-.param ch = 199.98u
+.param wcm = 'wi/3'
+.param wcm0= 'wi - wcm'
+
+.param ch = 160.02u
 
 
 .subckt opamp vg1 vg2 out1 out2 gcm ncmn Vdd GND!
@@ -36,11 +39,12 @@ Vcm vgcm 0 DC=1V
 Iref nref22 0 60u
 
 ** INPUT **
-M0 n1 gcm Vdd Vdd 	CMOSP l='l2' w='wi' ad='.66u*wi' as='.66u*wi' pd='1.32u+2*wi' ps='1.32u+2*wi'
+M0 n1 gcm Vdd Vdd 	CMOSP l='l2' w='wcm' ad='.66u*wcm' as='.66u*wcm' pd='1.32u+2*wcm' ps='1.32u+2*wcm'
+M00 n1 nref1 Vdd Vdd 	CMOSP l='l2' w='wcm0' ad='.66u*wcm0' as='.66u*wcm0' pd='1.32u+2*wcm0' ps='1.32u+2*wcm0'
 M1 n2 vg1 n1 Vdd 	CMOSP l='l1' w='wg' ad='.66u*wg' as='.66u*wg' pd='1.32u+2*wg' ps='1.32u+2*wg'
 M2 n3 vg2 n1 Vdd 	CMOSP l='l1' w='wg' ad='.66u*wg' as='.66u*wg' pd='1.32u+2*wg' ps='1.32u+2*wg'
-M3 n4 nref2 n2 Vdd 	CMOSP l='l2' w='wg' ad='.66u*wg' as='.66u*wg' pd='1.32u+2*wg' ps='1.32u+2*wg'
-M4 n7 nref2 n3 Vdd 	CMOSP l='l2' w='wg' ad='.66u*wg' as='.66u*wg' pd='1.32u+2*wg' ps='1.32u+2*wg'
+M3 n4 nref2 n2 Vdd 	CMOSP l='l2' w='ch' ad='.66u*ch' as='.66u*ch' pd='1.32u+2*ch' ps='1.32u+2*ch'
+M4 n7 nref2 n3 Vdd 	CMOSP l='l2' w='ch' ad='.66u*ch' as='.66u*ch' pd='1.32u+2*ch' ps='1.32u+2*ch'
 M5 n4 nref3 n8 0 	CMOSN l='l2' w='wf' ad='.66u*wf' as='.66u*wf' pd='1.32u+2*wf' ps='1.32u+2*wf'
 M6 n7 nref3 n9 0 	CMOSN l='l2' w='wf' ad='.66u*wf' as='.66u*wf' pd='1.32u+2*wf' ps='1.32u+2*wf'
 M7 n8 nref4 0 0 	CMOSN l='l2' w='wf' ad='.66u*wf' as='.66u*wf' pd='1.32u+2*wf' ps='1.32u+2*wf'
@@ -85,8 +89,8 @@ Mcm8 ncmn ncmn Vdd Vdd 	CMOSP l='l2' w='wd' ad='.66u*wd' as='.66u*wd' pd='1.32u+
 ** PASSIVE COMPONENTS **
 CL1 out1 0 'var*3p'
 CL2 out2 0 'var*3p'
-Cc1 n4 out1 'var*1.5p'
-Cc2 n7 out2 'var*1.5p'
+Cc1 n4 out1 'var*1.2p'
+Cc2 n7 out2 'var*1.2p'
 *Rc1 nc1 n4 'var*700'
 *Rc2 nc2 n7 'var*700'
 *Ccm ncmn ncmp 1p
@@ -100,51 +104,51 @@ Cc2 n7 out2 'var*1.5p'
 ************************
 
 ** DEFAULT SETUP ******************************
-*Xop1 vg1 vg2 out1 out2 ncm ncm Vdd 0 opamp
-*Cin1 vg1 0 1p
-*Cin2 vg1 0 1p
-*Clp1 vg1 out1 1p
-*Clp2 vg2 out2 1p
+Xop1 vg1 vg2 out1 out2 ncm ncm Vdd 0 opamp
+Cin1 vg1 0 1p
+Cin2 vg1 0 1p
+Clp1 vg1 out1 1p
+Clp2 vg2 out2 1p
 ***********************************************
 
 ** CMFB EVALUATION SETUP **********************
-*Vcmtest vt 0 DC=1755.8982m AC=1V
+*Vcmtest vt 0 DC=1728.0753m AC=1V
 *Xop1 vg1 vg2 out1 out2 vt cmfb_out Vdd 0 opamp
 *Xop2 vg1 vg2 ot1 ot2 cmfb_out nf Vdd 0 opamp
 ************************************************
 
 ** DIFFERENTIAL GAIN SETUP ********************
-Xop1 vg1 vg2 out1 out2 ncm1 ncm1 Vdd 0 opamp
-Xop2 n23 n24 ot1 ot2 ncm2 ncm2 Vdd 0 opamp
+*Xop1 vg1 vg2 out1 out2 ncm1 ncm1 Vdd 0 opamp
+*Xop2 n23 n24 ot1 ot2 ncm2 ncm2 Vdd 0 opamp
 
-Cin1 n23 vb 'var*1p'
-Cin2 n24 vb 'var*1p'
-Rgig1 n23 vb 'var*1g' 
-Rgig2 n24 vb 'var*1g' 
-Clp1 n23 out1 'var*1p'
-Clp2 n24 out2 'var*1p'
+*Cin1 n23 vb 'var*1p'
+*Cin2 n24 vb 'var*1p'
+*Rgig1 n23 vb 'var*1g' 
+*Rgig2 n24 vb 'var*1g' 
+*Clp1 n23 out1 'var*1p'
+*Clp2 n24 out2 'var*1p'
 
-Cin3 n21 vb 'var*1p'
-Cin4 n22 vb 'var*1p'
-Rgig3 n21 vb 'var*1g' 
-Rgig4 n22 vb 'var*1g' 
-Clp3 n21 ot1 'var*1p'
-Clp4 n22 ot2 'var*1p'
+*Cin3 n21 vb 'var*1p'
+*Cin4 n22 vb 'var*1p'
+*Rgig3 n21 vb 'var*1g' 
+*Rgig4 n22 vb 'var*1g' 
+*Clp3 n21 ot1 'var*1p'
+*Clp4 n22 ot2 'var*1p'
 **********************************************
 
 ** SOURCES **
-Vin1 vg1 vb AC=.5,180
-Vin2 vg2 vb AC=.5,0
+Vin1 vg1 0 DC=1.25V AC=.5,180
+Vin2 vg2 0 DC=1.25V AC=.5,0
 *Vin vg1 vg2 DC=1V
 VD Vdd 0 DC=2.5V
-Vbb vb 0 DC=1.25V
+*Vbb vb 0 DC=1.25V
 
 ** SIMULATION **
 .param var=1
-.temp 27
+.temp 25
 .op
 *.pz V(cmfb_out) Vcmtest
 *.pz V(out2) Vin1
 .ac dec 10 1e3 1e9
-.dc vin1 1.245 1.255 1u
+.dc Vin1 1.01 .99 .00001
 .end

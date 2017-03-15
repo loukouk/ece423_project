@@ -1,4 +1,5 @@
-SOURCE = pro
+SOURCE = pro_final
+
 
 default:
 	hspice ${SOURCE}.sp :> ${SOURCE}.lis
