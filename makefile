@@ -1,4 +1,4 @@
-SOURCE = proj
+SOURCE = pro
 
 default:
 	hspice ${SOURCE}.sp :> ${SOURCE}.lis
