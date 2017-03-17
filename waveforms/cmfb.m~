@@ -1,0 +1,52 @@
+
+close all
+clc
+clearvars
+
+fp(1)=fopen('cmfb_gain_fast.txt','r');
+fp(2)=fopen('cmfb_gain_nominal.txt','r');
+fp(3)=fopen('cmfb_gain_slow.txt','r');
+f=fscanf(fp,'%f\t%f+j%f',[3,61])
+%y=fft(x)
+%plot(y)
+
+
+for i = 1:61
+    y2(i) = angle(f(2,i) + f(3,i)*j) * 180 / pi;
+    y11(i) = sqrt( (f(2,i))^2 + (f(3,i))^2 );
+    x(i) = f(1,i);
+end
+y1 = 10*log(y11)
+for i = 1:61
+    y2(i) = angle(f(2,i) + f(3,i)*j) * 180 / pi;
+    y11(i) = sqrt( (f(2,i))^2 + (f(3,i))^2 );
+    x(i) = f(1,i);
+end
+
+
+figure;
+subplot(2,1,1);
+semilogx(x,y1);
+subplot(2,1,2);
+semilogx(x,y2);
+
+% s(1) = subplot(2,1,1);
+% plot(x_space2,d1/.000001);
+% hold;
+% plot(x_space2,d2/.000001);
+% xlim([1.2497 1.2503]);
+% ylabel('Differential Gain (V/V)') % y-axis label
+% %set(s(1),'XTick',[]);
+% grid on;
+% title('Gain Curves in Fast case');
+
+% s(2)=subplot(2,1,2);
+% plot(x_space,V1);
+% hold;
+% plot(x_space,-V2);
+% xlim([1.2497 1.2503])
+% xlabel('Differential Input Voltage (V)') % x-axis label
+% ylabel('Output Voltage (V)') % y-axis label
+% title('Voltage Swing in Fast case')
+% set(s,'box','off');
+% grid on;
