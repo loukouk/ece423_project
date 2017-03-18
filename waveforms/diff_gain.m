@@ -3,9 +3,9 @@ close all
 clc
 clearvars
 
-fp1=fopen('cmfb_gain_extracted.txt','r');
-%fp2=fopen('cmfb_gain_nominal.txt','r');
-%fp3=fopen('cmfb_gain_slow.txt','r');
+fp1=fopen('diff_gain_extracted.txt','r');
+%fp2=fopen('diff_gain_nominal.txt','r');
+%fp3=fopen('diff_gain_slow.txt','r');
 f1=fscanf(fp1,'%f\t%f+j%f',[3,61]);
 %f2=fscanf(fp2,'%f\t%f+j%f',[3,61]);
 %f3=fscanf(fp3,'%f\t%f+j%f',[3,61])
@@ -31,7 +31,7 @@ y11 = 10*log(y10)
 %     x(i) = f3(1,i);
 % end
 % y31 = 10*log(y30)
-% 
+
 figure('color', 'w');
 subplot(2,1,1);
 semilogx(x,y11);
@@ -41,7 +41,7 @@ semilogx(x,y11);
 % semilogx(x,y31);
 % hold off
 xlim([1000 500000000])
-title('Common Mode Feedback Gain for Extracted Layout');
+title('Differential Gain of Extracted Layout');
 %xlabel('Frequency (Hz)') % x-axis label
 ylabel('CMFB Gain (dB)') % y-axis label
 legend('Extracted','Fast', 'Nominal', 'Slow');
@@ -55,7 +55,7 @@ semilogx(x,y12);
 % hold on;
 % semilogx(x,y32);
 xlim([1000 500000000])
-title('Common Mode Feedback Phase for Extracted Layout');
+title('Differential Phase of Extracted Layout');
 xlabel('Frequency (Hz)') % x-axis label
 ylabel('CMFB Phase (deg)') % y-axis label
 legend('Extracted','Fast', 'Nominal', 'Slow');

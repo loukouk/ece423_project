@@ -7,5 +7,8 @@
 *.tr0
 *.pa0
 *.ls
+*.op0
+*.su0
+.*
 scope.log
 scope.log.bak

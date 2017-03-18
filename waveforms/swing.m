@@ -8,7 +8,7 @@ x_space2 = linspace(1.249,1.251,2000);
 x_diff = diff(x_space)
 
 % Output curves
-x=loadsig('pro_final.sw0');
+x=loadsig('../pro_extracted.sw0');
 
 V1= evalsig(x, 'v_out1');
 V2= -evalsig(x, 'v_out2');
@@ -26,7 +26,7 @@ xlim([1.2497 1.2503]);
 ylabel('Differential Gain (V/V)') % y-axis label
 %set(s(1),'XTick',[]);
 grid on;
-title('Gain Curves in Fast case');
+title('Gain Curves for Extracted Layout');
 
 s(2)=subplot(2,1,2);
 plot(x_space,V1);
@@ -35,6 +35,6 @@ plot(x_space,-V2);
 xlim([1.2497 1.2503])
 xlabel('Differential Input Voltage (V)') % x-axis label
 ylabel('Output Voltage (V)') % y-axis label
-title('Voltage Swing in Fast case')
+title('Voltage Swing for Extracted Layout')
 set(s,'box','off');
 grid on;
